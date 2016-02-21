@@ -1,0 +1,6 @@
+node_modules/*
+.idea/*
+.sass-cache/*
+*.sublime-*
+public/css/builds/*.css
+public/css/builds/*.css.map

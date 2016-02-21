@@ -1,0 +1,16 @@
+{
+  "name": "Mokou",
+  "short_name": "Mokou",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#4F0000",
+  "theme_color": "#4F0000",
+  "icons": [{
+        "src": "icons/hd_small",
+        "sizes": "64x64"
+      }, {
+        "src": "icons/hd_hi",
+        "sizes": "128x128",
+        "density": 2
+      }],
+}
