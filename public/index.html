@@ -11,8 +11,54 @@
     <title>Mokou</title>
     <link rel="icon" type="image/png" href="img/icons/small.png" sizes="32x32"/>
     <link rel="icon" type="image/png" href="img/icons/hd_small.png" sizes="64x64"/>
-    <link type="text/css" rel="stylesheet" href="/css/builds/build.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/css/build_default.css" media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto"
           media="screen,projection"/>
     <meta name="viewport" content="initial-scale=0.5">
 </head>
+<body>
+<div class="container">
+    <div class="header">
+            <span class="menu_button lg_hide"><!--hide on large screens, show on phones/tablets-->
+                <img src="img/users-icon.png">
+            </span>
+            <span class="users_button lg_hide"><!--hide on large screens, show on phones/tablets-->
+                <img src="img/menu-icon.png">
+            </span>
+
+        <div class="logo">
+            Mokou
+        </div>
+    </div>
+    <div class="chat">
+        <div class="message">
+            <div class="time" title="full time">12:20:22</div>
+            <span class="user" style="background: url(img/icons/small.png) 0 0 no-repeat">Сырно:</span>
+            <span class="text">Гав гав гав гав?</span>
+        </div>
+        <div class="chat_event">
+            <div class="time" title="full time">12:20:22</div>
+            <b>Сырна</b> выходит из чата.
+        </div>
+        <div class="chat_system">
+            <div class="time" title="full time">12:20:22</div>
+            Каргласс сас лал
+        </div>
+    </div>
+    <div class="userList">
+        <div class="userListItem">
+            <span class="user" style="background: url(img/icons/small.png) 0 0 no-repeat">Сырно</span>
+        </div>
+    </div>
+    <div class="controls">
+        <input type="text" id="chatInputMessage" maxlength="300" title="">
+        <button id="chatExitButton">Exit</button>
+    </div>
+    <div class="login">
+        <input type="text" id="loginInputNick" maxlength="50" title="">
+        <button id="chatEnterButton">Login</button>
+    </div>
+</div>
+</body>
+<script src="js/build.js"></script>
+</html>
