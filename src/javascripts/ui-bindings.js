@@ -33,4 +33,5 @@ jQuery(function ($) {
             mokou_client_ui.scrolledToBottom = false;
         }
     });
+    mokou_client.init();
 });

@@ -18,18 +18,18 @@ mokou_client_ui.login = function () {
     var login = $("#loginInputNick")[0].value;
     if (login === "" || login.length > 50)return;
     var res = mokou_client.login(login);
-    if (res === true) {
-        $(".loginBox").addClass("hide");
-        $(".messageBox").removeClass("hide");
-    }
-    else {
-        alert(res.reason);
-    }
 };
+mokou_client_ui.onLogin = function () {
+    $(".loginBox").addClass("hide");
+    $(".messageBox").removeClass("hide");
+};
+
 mokou_client_ui.logout = function () {
+    mokou_client.logout();
+};
+mokou_client_ui.onLogout = function () {
     $(".loginBox").removeClass("hide");
     $(".messageBox").addClass("hide");
-    mokou_client.logout();
 };
 
 mokou_client_ui.scrolledToBottom = true;
@@ -47,7 +47,22 @@ mokou_client_ui.chatAddMessage = function (name, text, time, icon) {
         $(msg.getElementsByClassName("user")[0]).css("background", "url(" + icon + ") left center no-repeat");
         $(msg.getElementsByClassName("user")[0]).addClass("hasIcon");
     }
-    msg.getElementsByClassName("text")[0].appendChild(document.createTextNode(text));
+    msg.getElementsByClassName("text")[0].innerHTML = text;
+    if (mokou_client_ui.scrolledToBottom) {
+        $(".chat")[0].appendChild(msg);
+        mokou_client_ui.scrollToBottom();
+        $("#new_messages").addClass("hide");
+    }
+    else {
+        $(".chat")[0].appendChild(msg);
+        $("#new_messages").removeClass("hide");
+    }
+};
+mokou_client_ui.chatAddEvent = function (text, time) {
+    var msg = mokou_client_ui.createFromTemplate("chat_event");
+    var date = new Date(time * 1000);
+    msg.getElementsByClassName("time")[0].appendChild(document.createTextNode(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()));
+    msg.getElementsByClassName("text")[0].innerHTML = text;
     if (mokou_client_ui.scrolledToBottom) {
         $(".chat")[0].appendChild(msg);
         mokou_client_ui.scrollToBottom();
