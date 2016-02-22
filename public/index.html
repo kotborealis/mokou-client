@@ -17,57 +17,53 @@
 </head>
 <body>
 <div class="container">
+    <div id="new_messages" class="hide">Есть новые сообщения</div>
     <div class="header">
-            <span class="menu_button lg_hide"><!--hide on large screens, show on phones/tablets-->
+            <span class="users_button lg_hide">
                 <img src="img/users-icon.png">
             </span>
-            <span class="users_button lg_hide"><!--hide on large screens, show on phones/tablets-->
-                <img src="img/menu-icon.png">
-            </span>
-
+        <!--<span class="menu_button_button lg_hide">
+            <img src="img/menu-icon.png">
+        </span>-->
         <div class="logo">
             Ses
         </div>
     </div>
     <div class="chat">
-        <div class="message">
-            <div class="time" title="full time">12:20:22</div>
-            <span class="user hasIcon"
-                  style="background: url(http://chatadelic.net/files/hpic/28/88/4034.png) left center no-repeat">Сырно:</span>
-            <span class="text">Гав гав гав гав?</span>
-        </div>
-        <div class="chat_event">
-            <div class="time" title="full time">12:20:22</div>
-            <span class="text"><b>Сырна</b> выходит из чата.</span>
-        </div>
 
     </div>
     <div class="userList sm_hide">
-        <div class="userListItem">
-            <span class="user hasIcon"
-                  style="background: url(http://chatadelic.net/files/hpic/28/88/4034.png) no-repeat left center">Сырно</span>
-        </div>
-        <div class="userListItem">
-            <span class="user">Сырно</span>
-        </div>
-        <div class="userListItem">
-            <span class="user">Сырно</span>
-        </div>
+
     </div>
     <div class="controls">
-        <div class="messageBox">
+        <div class="messageBox hide">
             <input type="text" id="chatInputMessage" maxlength="300" title="">
             <button id="chatSayButton">Сказать</button>
             <span id="chatExitButton"><img src="img/exit-icon.png" width="20"></span>
         </div>
-        <div class="loginBox hide">
-            <div class="input-control">
+        <div class="loginBox">
+            <form id="loginForm">
                 <input type="text" id="loginInputNick" maxlength="50" title="" placeholder="Ник">
                 <button id="chatLoginButton">Войти</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
+<div class="hide" id="templates">
+    <div class="chat_message">
+        <div class="time"></div>
+        <span class="user"></span>
+        <span class="text"></span>
+    </div>
+    <div class="chat_event">
+        <div class="time"></div>
+        <span class="text"></span>
+    </div>
+    <div class="userListItem">
+        <span class="user"></span>
+    </div>
+</div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="js/build.js"></script>
 </html>

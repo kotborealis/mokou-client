@@ -21,7 +21,7 @@ module.exports = function (grunt) {
 
         concat: {
             default: {
-                src: ['src/javascripts/*.js'],
+                src: ['src/javascripts/client.js', 'src/javascripts/ui.js', 'src/javascripts/ui-bindings.js', 'src/javascripts/*.js'],
                 dest: 'public/js/build.js'
             }
         },

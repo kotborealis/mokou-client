@@ -1,0 +1,1 @@
+mokou_client_ui.initTemplate();
