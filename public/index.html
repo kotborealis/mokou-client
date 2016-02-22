@@ -8,13 +8,12 @@
     <link rel="icon" sizes="192x192" href="img/icons/hd.png">
     <link rel="manifest" href="web-manifest.json">
     <meta name="theme-color" content="#4F0000">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Mokou</title>
     <link rel="icon" type="image/png" href="img/icons/small.png" sizes="32x32"/>
     <link rel="icon" type="image/png" href="img/icons/hd_small.png" sizes="64x64"/>
-    <link type="text/css" rel="stylesheet" href="/css/build_default.css" media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto"
-          media="screen,projection"/>
-    <meta name="viewport" content="initial-scale=0.5">
+    <link type="text/css" rel="stylesheet" href="css/build_default.css"/>
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto">
 </head>
 <body>
 <div class="container">
@@ -27,36 +26,46 @@
             </span>
 
         <div class="logo">
-            Mokou
+            Ses
         </div>
     </div>
     <div class="chat">
         <div class="message">
             <div class="time" title="full time">12:20:22</div>
-            <span class="user" style="background: url(img/icons/small.png) 0 0 no-repeat">Сырно:</span>
+            <span class="user hasIcon"
+                  style="background: url(http://chatadelic.net/files/hpic/28/88/4034.png) left center no-repeat">Сырно:</span>
             <span class="text">Гав гав гав гав?</span>
         </div>
         <div class="chat_event">
             <div class="time" title="full time">12:20:22</div>
-            <b>Сырна</b> выходит из чата.
+            <span class="text"><b>Сырна</b> выходит из чата.</span>
         </div>
-        <div class="chat_system">
-            <div class="time" title="full time">12:20:22</div>
-            Каргласс сас лал
-        </div>
+
     </div>
-    <div class="userList">
+    <div class="userList sm_hide">
         <div class="userListItem">
-            <span class="user" style="background: url(img/icons/small.png) 0 0 no-repeat">Сырно</span>
+            <span class="user hasIcon"
+                  style="background: url(http://chatadelic.net/files/hpic/28/88/4034.png) no-repeat left center">Сырно</span>
+        </div>
+        <div class="userListItem">
+            <span class="user">Сырно</span>
+        </div>
+        <div class="userListItem">
+            <span class="user">Сырно</span>
         </div>
     </div>
     <div class="controls">
-        <input type="text" id="chatInputMessage" maxlength="300" title="">
-        <button id="chatExitButton">Exit</button>
-    </div>
-    <div class="login">
-        <input type="text" id="loginInputNick" maxlength="50" title="">
-        <button id="chatEnterButton">Login</button>
+        <div class="messageBox">
+            <input type="text" id="chatInputMessage" maxlength="300" title="">
+            <button id="chatSayButton">Сказать</button>
+            <span id="chatExitButton"><img src="img/exit-icon.png" width="20"></span>
+        </div>
+        <div class="loginBox hide">
+            <div class="input-control">
+                <input type="text" id="loginInputNick" maxlength="50" title="" placeholder="Ник">
+                <button id="chatLoginButton">Войти</button>
+            </div>
+        </div>
     </div>
 </div>
 </body>
