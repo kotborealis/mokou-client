@@ -26,6 +26,11 @@ mokou_client_ui.login = function () {
         alert(res.reason);
     }
 };
+mokou_client_ui.logout = function () {
+    $(".loginBox").removeClass("hide");
+    $(".messageBox").addClass("hide");
+    mokou_client.logout();
+};
 
 mokou_client_ui.scrolledToBottom = true;
 mokou_client_ui.scrollToBottom = function () {
@@ -33,11 +38,15 @@ mokou_client_ui.scrollToBottom = function () {
 };
 
 
-mokou_client_ui.chatAddMessage = function (name, text, time) {
+mokou_client_ui.chatAddMessage = function (name, text, time, icon) {
     var msg = mokou_client_ui.createFromTemplate("chat_message");
     var date = new Date(time * 1000);
     msg.getElementsByClassName("time")[0].appendChild(document.createTextNode(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()));
     msg.getElementsByClassName("user")[0].appendChild(document.createTextNode(name + ":"));
+    if (icon !== "" && icon !== null && icon !== undefined) {
+        $(msg.getElementsByClassName("user")[0]).css("background", "url(" + icon + ") left center no-repeat");
+        $(msg.getElementsByClassName("user")[0]).addClass("hasIcon");
+    }
     msg.getElementsByClassName("text")[0].appendChild(document.createTextNode(text));
     if (mokou_client_ui.scrolledToBottom) {
         $(".chat")[0].appendChild(msg);
@@ -48,4 +57,23 @@ mokou_client_ui.chatAddMessage = function (name, text, time) {
         $(".chat")[0].appendChild(msg);
         $("#new_messages").removeClass("hide");
     }
+};
+
+mokou_client_ui.userListAddUser = function (id, name, icon) {
+    var user = mokou_client_ui.createFromTemplate("userListItem");
+    user.getElementsByClassName("user")[0].appendChild(document.createTextNode(name));
+    if (icon !== "" && icon !== null && icon !== undefined) {
+        $(user.getElementsByClassName("user")[0]).css("background", "url(" + icon + ") left center no-repeat");
+        $(user.getElementsByClassName("user")[0]).addClass("hasIcon");
+    }
+    $(user).attr("id", "id_" + id);
+    $(".userList")[0].appendChild(user);
+};
+mokou_client_ui.userListRemoveUser = function (id) {
+    for (var i = 0; i < $(".userList>.userListItem").length; i++)
+        if ($($(".userList>.userListItem")[i]).attr("id") == "id_" + id) {
+            $($(".userList>.userListItem")[i]).remove();
+            return true;
+        }
+    return false;
 };

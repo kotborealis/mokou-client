@@ -4,9 +4,13 @@ jQuery(function ($) {
         event.preventDefault();
         mokou_client_ui.login();
     };
-    $("#chatLoginButton").onclick = function (e) {
-        event.preventDefault();
+    $("#chatLoginButton")[0].onclick = function (e) {
+        e.preventDefault();
         mokou_client_ui.login();
+    };
+    $("#chatExitButton")[0].onclick = function (e) {
+        e.preventDefault();
+        mokou_client_ui.logout();
     };
     $("#new_messages")[0].onclick = function () {
         mokou_client_ui.scrollToBottom();
