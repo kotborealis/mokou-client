@@ -8,6 +8,16 @@ jQuery(function ($) {
         e.preventDefault();
         mokou_client_ui.login();
     };
+    $("#messageForm")[0].onsubmit = function (e) {
+        event.preventDefault();
+        mokou_client.sendMessage($("#chatInputMessage")[0].value);
+        $("#chatInputMessage")[0].value = "";
+    };
+    $("#chatSayButton")[0].onclick = function (e) {
+        event.preventDefault();
+        mokou_client.sendMessage($("#chatInputMessage")[0].value);
+        $("#chatInputMessage")[0].value = "";
+    };
     $("#chatExitButton")[0].onclick = function (e) {
         e.preventDefault();
         mokou_client_ui.logout();
