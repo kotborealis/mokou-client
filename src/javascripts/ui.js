@@ -22,6 +22,7 @@ mokou_client_ui.login = function () {
 mokou_client_ui.onLogin = function () {
     $(".loginBox").addClass("hide");
     $(".messageBox").removeClass("hide");
+    $("#chatInputMessage")[0].focus();
 };
 
 mokou_client_ui.logout = function () {

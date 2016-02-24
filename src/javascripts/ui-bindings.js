@@ -1,4 +1,5 @@
 jQuery(function ($) {
+    $("#loginInputNick")[0].focus();
     $('.users_button')[0].onclick = mokou_client_ui.showUsersList;
     $("#loginForm")[0].onsubmit = function (e) {
         event.preventDefault();
