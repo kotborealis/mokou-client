@@ -4,15 +4,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="mokou">
+    <meta name="application-name" content="@@app.name">
     <link rel="icon" sizes="192x192" href="img/icons/hd.png">
-    <link rel="manifest" href="web-manifest.json">
-    <meta name="theme-color" content="#4F0000">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="@@theme.color">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Mokou</title>
+    <title>@@app.name</title>
     <link rel="icon" type="image/png" href="img/icons/small.png" sizes="32x32"/>
     <link rel="icon" type="image/png" href="img/icons/hd_small.png" sizes="64x64"/>
-    <link type="text/css" rel="stylesheet" href="css/build_default.css"/>
+    <link type="text/css" rel="stylesheet" href="css/build_default.css?rel=@@timestamp"/>
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto">
 </head>
 <body>
@@ -67,5 +67,5 @@
 </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<script src="js/build.js"></script>
+<script src="js/build.js?rel=@@timestamp"></script>
 </html>
