@@ -2,8 +2,10 @@ var mokou_client = {};
 
 //init
 mokou_client.init = function () {
-    if (window.location.hash === "")return;
-    mokou_client.ws = new WebSocket("ws://" + window.location.hash.substr(1));
+    if (window.location.hash === "")
+        mokou_client.ws = new WebSocket("ws://" + window.location.hostname + ":8090");
+    else
+        mokou_client.ws = new WebSocket("ws://" + window.location.hash.substr(1));
     mokou_client.ws.onmessage = function (e) {
         var data = JSON.parse(e.data);
         if (Array.isArray(data))
