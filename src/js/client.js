@@ -29,7 +29,12 @@ mokou_client.sendMessage = function (message) {
 
 //handlers
 mokou_client.handle = function (data) {
-    mokou_client.handlers[data.t](data);
+    try{
+        mokou_client.handlers[data.t](data);
+    }
+    catch(e){
+        console.log(e);
+    }
 };
 mokou_client.handlers={};
 mokou_client.handlers["loggedIn"]=function(data){
