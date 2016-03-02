@@ -44,5 +44,6 @@ jQuery(function ($) {
             mokou_client_ui.scrolledToBottom = false;
         }
     });
+    mokou_client_ui.initTemplate();
     mokou_client.init();
 });
