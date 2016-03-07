@@ -40,9 +40,22 @@ mokou_client_ui.scrollToBottom = function () {
 
 
 mokou_client_ui.chatAddMessage = function (id, name, text, time, icon, color) {
+    console.log("Ебаный аутизм!11");
+    if (text.indexOf(mokou_client.cur_name) >= 0) {
+        console.log("ТЫ ПИДОР ЧТО ЛИ", text);
+        text = text.replace(new RegExp(mokou_client.cur_name + ",", "g"), "<span class='userName'>" + mokou_client.cur_name + ",</span>");
+        console.log(text);
+        $("#snd_beep")[0].play();
+    }
+    else {
+        $("#snd_click")[0].play();
+    }
     var msg = mokou_client_ui.createFromTemplate("chat_message");
     var date = new Date(time * 1000);
     msg.id = "msg_" + id;
+    msg.getElementsByClassName("user")[0].onclick = function () {
+        mokou_client_ui.insertName(name)
+    };
     msg.getElementsByClassName("time")[0].appendChild(document.createTextNode(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()));
     msg.getElementsByClassName("user")[0].appendChild(document.createTextNode(name + ":"));
     if (icon !== "" && icon !== null && icon !== undefined) {
@@ -50,7 +63,7 @@ mokou_client_ui.chatAddMessage = function (id, name, text, time, icon, color) {
         $(msg.getElementsByClassName("user")[0]).addClass("hasIcon");
     }
     msg.getElementsByClassName("text")[0].innerHTML = text;
-    msg.getElementsByClassName("text")[0].color = color === null ? "" : "#" + color;
+    $(msg.getElementsByClassName("text")[0]).css("color", color === null ? "" : "#" + color);
     if (mokou_client_ui.scrolledToBottom) {
         $(".chat")[0].appendChild(msg);
         mokou_client_ui.scrollToBottom();
@@ -62,6 +75,16 @@ mokou_client_ui.chatAddMessage = function (id, name, text, time, icon, color) {
     }
 };
 mokou_client_ui.chatAddEvent = function (text, time) {
+    console.log("Ебаный аутизм!11");
+    if (text.indexOf(mokou_client.cur_name) >= 0) {
+        console.log("ТЫ ПИДОР ЧТО ЛИ", text);
+        text = text.replace(new RegExp(mokou_client.cur_name + ",", "g"), "<span class='userName'>" + mokou_client.cur_name + ",</span>");
+        console.log(text);
+        $("#snd_beep")[0].play();
+    }
+    else {
+        $("#snd_click")[0].play();
+    }
     var msg = mokou_client_ui.createFromTemplate("chat_event");
     var date = new Date(time * 1000);
     msg.getElementsByClassName("time")[0].appendChild(document.createTextNode(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()));
@@ -80,6 +103,9 @@ mokou_client_ui.chatAddEvent = function (text, time) {
 mokou_client_ui.userListAddUser = function (id, name, icon) {
     var user = mokou_client_ui.createFromTemplate("userListItem");
     user.getElementsByClassName("user")[0].appendChild(document.createTextNode(name));
+    user.getElementsByClassName("user")[0].onclick = function () {
+        mokou_client_ui.insertName(name)
+    };
     if (icon !== "" && icon !== null && icon !== undefined) {
         $(user.getElementsByClassName("user")[0]).css("background", "url(" + icon + ") left center no-repeat");
         $(user.getElementsByClassName("user")[0]).addClass("hasIcon");
@@ -94,6 +120,13 @@ mokou_client_ui.userListRemoveUser = function (id) {
             return true;
         }
     return false;
+};
+
+mokou_client_ui.insertName = function (name) {
+    if ($("#chatInputMessage")[0].value.indexOf(name) === -1)
+        $("#chatInputMessage")[0].value = name + ", " + $("#chatInputMessage")[0].value;
+    $("#chatInputMessage")[0].focus();
+
 };
 
 function handleImgSize(img) {
