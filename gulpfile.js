@@ -13,9 +13,9 @@ gulp.task('css',function(){
 gulp.task('js',function(){
 	return gulp.src(['src/js/*.js'])
         .pipe(_.sourcemaps.init())
-        .pipe(_.babel({
+		/*.pipe(_.babel({
             presets: ['es2015']
-        }))
+		 }))*/
         .pipe(_.concat('build.js'))
         .pipe(_.sourcemaps.write('.'))
         .pipe(gulp.dest('./public/js'))

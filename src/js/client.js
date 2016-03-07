@@ -33,7 +33,7 @@ mokou_client.handle = function (data) {
         mokou_client.handlers[data.t](data);
     }
     catch(e){
-        console.log(e);
+        console.log(e, data);
     }
 };
 mokou_client.handlers={};
@@ -44,16 +44,19 @@ mokou_client.handlers["loggedOut"]=function(data){
     mokou_client_ui.onLogout();
 };
 mokou_client.handlers["user"]=function(data){
-    if (data.event === "in")
-            mokou_client_ui.userListAddUser(data.user.id, data.user.name);
-    if (data.event === "out")
-        mokou_client_ui.userListRemoveUser(data.user.id);
+    if (data.event.toLowerCase() === "in")
+        mokou_client_ui.userListAddUser(data.user.id ? data.user.id : data.user.regId, data.user.name);
+    if (data.event.toLowerCase() === "out")
+        mokou_client_ui.userListRemoveUser(data.user.id ? data.user.id : data.user.regId);
 };
 mokou_client.handlers["msg"]=function(data){
     if(data.from === "" || data.fl==="sys"){
         mokou_client_ui.chatAddEvent(data.text, data.ts);
     }
     else{
-        mokou_client_ui.chatAddMessage(data.from, data.text, data.ts);
+        mokou_client_ui.chatAddMessage(data.id, data.from, data.text, data.ts, data.icon, data.tc);
     }
+};
+mokou_client.handlers["reset"] = function () {
+    $(".chat")[0].innerHTML = "";
 };

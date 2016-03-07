@@ -39,16 +39,18 @@ mokou_client_ui.scrollToBottom = function () {
 };
 
 
-mokou_client_ui.chatAddMessage = function (name, text, time, icon) {
+mokou_client_ui.chatAddMessage = function (id, name, text, time, icon, color) {
     var msg = mokou_client_ui.createFromTemplate("chat_message");
     var date = new Date(time * 1000);
+    msg.id = "msg_" + id;
     msg.getElementsByClassName("time")[0].appendChild(document.createTextNode(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()));
     msg.getElementsByClassName("user")[0].appendChild(document.createTextNode(name + ":"));
     if (icon !== "" && icon !== null && icon !== undefined) {
-        $(msg.getElementsByClassName("user")[0]).css("background", "url(" + icon + ") left center no-repeat");
+        $(msg.getElementsByClassName("user")[0]).css("background", "url(http://chatadelic.net" + icon + ") left center no-repeat");
         $(msg.getElementsByClassName("user")[0]).addClass("hasIcon");
     }
     msg.getElementsByClassName("text")[0].innerHTML = text;
+    msg.getElementsByClassName("text")[0].color = color === null ? "" : "#" + color;
     if (mokou_client_ui.scrolledToBottom) {
         $(".chat")[0].appendChild(msg);
         mokou_client_ui.scrollToBottom();
@@ -93,3 +95,16 @@ mokou_client_ui.userListRemoveUser = function (id) {
         }
     return false;
 };
+
+function handleImgSize(img) {
+    try {
+        img.onclick = function (i) {
+            window.open(i.target.src, '_blank').focus();
+        }
+    }
+    catch (e) {
+        img.onload = function () {
+            handleImgSize(img);
+        }
+    }
+}
