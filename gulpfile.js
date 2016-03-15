@@ -12,7 +12,7 @@ gulp.task('css',function(){
 
 gulp.task('js',function(){
 	return gulp.src(['src/js/main.js',
-				'src/js/client.js',
+				'src/js/client/client.js', 'src/js/client/act.js', 'src/js/client/handle.js',
 				'src/js/ui/ui.js', 'src/js/ui/template.js', 'src/js/ui/chat.js', 'src/js/ui/userlist.js', 'src/js/ui/act.js', 'src/js/ui/event.js',
 				'src/js/util.js'])
         .pipe(_.sourcemaps.init())
