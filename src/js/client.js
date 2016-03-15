@@ -1,69 +1,128 @@
-var mokou_client = {};
+/**
+ * Client object, contains functions
+ * @type {{}}
+ */
+mokou.client = {};
 
-//init
-mokou_client.init = function () {
-    //mokou_client_ui.set_no_connection(1);
+/**
+ * Init websocket connection
+ */
+mokou.client.init = function () {
     if (window.location.hash === "")
-        mokou_client.ws = new WebSocket("ws://" + window.location.hostname + ":8090");
+        mokou.client.ws = new WebSocket("ws://" + window.location.hostname + ":8090");
     else
-        mokou_client.ws = new WebSocket("ws://" + window.location.hash.substr(1));
-    mokou_client.ws.onmessage = function (e) {
+        mokou.client.ws = new WebSocket("ws://" + window.location.hash.substr(1));
+
+    mokou.client.ws.onmessage = function (e) {
         var data = JSON.parse(e.data);
         if (Array.isArray(data))
             for (var i = 0; i < data.length; i++)
-                mokou_client.handle(data[i]);
+                mokou.client.handle(data[i]);
         else
-            mokou_client.handle(data);
+            mokou.client.handle(data);
     };
-    mokou_client.ws.onopen = function (e) {
-        mokou_client_ui.set_no_connection(0);
+
+    /**
+     * Error/close events
+     */
+    mokou.client.ws.onerror =
+        mokou.client.ws.onclose = function (e) {
+            mokou.ui.event.connection(0);
     };
-    mokou_client.ws.onerror = function (e) {
-        mokou_client_ui.set_no_connection(1);
-    };
-    mokou_client.ws.onclose = function (e) {
-        mokou_client_ui.set_no_connection(1);
+
+    /**
+     * Open event
+     */
+    mokou.client.ws.onopen = function (e) {
+        mokou.ui.event.connection(1);
     };
 };
 
-//send
-mokou_client.login = function (login) {
-    mokou_client.ws.send('{"act":"login","name":"' + login + '"}');
+/**
+ * Chat actions
+ * @type {{}}
+ */
+mokou.client.act = {};
+/**
+ * Login with given username
+ * @param {string} username
+ */
+mokou.client.act.login = function (username) {
+    if (!username)return;
+    mokou.client.ws.send(JSON.stringify({
+        act: "login",
+        name: username
+    }));
 };
-mokou_client.logout = function () {
-    mokou_client.ws.send('{"act":"logout"}');
+/**
+ * Logout
+ */
+mokou.client.act.logout = function () {
+    mokou.client.ws.send(JSON.stringify({
+        act: "logout"
+    }));
 };
-mokou_client.sendMessage = function (message) {
-    mokou_client.ws.send('{"act":"msg","msg":"' + message + '"}');
+/**
+ * Send given message
+ * @param {string} message
+ */
+mokou.client.act.message = function (message) {
+    if (!message)return;
+    mokou.client.ws.send(JSON.stringify({
+        act: "msg",
+        msg: message
+    }));
 };
 
-//handlers
-mokou_client.handle = function (data) {
-    try{
-        mokou_client.handlers[data.t](data);
-    }
+/**
+ * Handle given data
+ * @param {{}} data
+ * @param {string} data.t
+ */
+mokou.client.handle = function (data) {
+    //try{
+    mokou.client.handlers[data.t](data);
+    /*}
     catch(e){
         console.log(e);
-    }
+     }*/
 };
-mokou_client.handlers={};
-mokou_client.handlers["loggedIn"]=function(data){
-    mokou_client_ui.onLogin();
+/**
+ * Handlers
+ * @type {{}}
+ */
+mokou.client.handlers = {};
+/**
+ * Handle logged in event
+ */
+mokou.client.handlers["loggedIn"] = function () {
+    mokou.ui.event.login();
 };
-mokou_client.handlers["loggedOut"]=function(data){
-    mokou_client_ui.onLogout();
+/**
+ * Handle logged out event
+ * @param data
+ */
+mokou.client.handlers["loggedOut"] = function (data) {
+    mokou.ui.event.logout();
 };
-mokou_client.handlers["user"]=function(data){
-    if (data.event === "in")
-            mokou_client_ui.userListAddUser(data.user.id, data.user.name);
-    if (data.event === "out")
-        mokou_client_ui.userListRemoveUser(data.user.id);
+/**
+ * Handle user in/out events
+ * @param data
+ */
+mokou.client.handlers["user"] = function (data) {
+    mokou.ui.event.user(data);
 };
-mokou_client.handlers["msg"]=function(data){
+/**
+ * Handle message or event
+ * @param data
+ * @param data.fl
+ * @param data.from
+ */
+mokou.client.handlers["msg"] = function (data) {
     if(data.from === "" || data.fl==="sys"){
-        mokou_client_ui.chatAddEvent(data.text, data.ts);
+        mokou.ui.event.event(data);
     }
     else{
-        mokou_client_ui.chatAddMessage(data.from, data.text, data.ts);
+        mokou.ui.event.message(data);
     }
 };
