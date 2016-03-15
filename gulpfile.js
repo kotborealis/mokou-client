@@ -16,9 +16,9 @@ gulp.task('js',function(){
 				'src/js/ui/ui.js', 'src/js/ui/template.js', 'src/js/ui/chat.js', 'src/js/ui/userlist.js', 'src/js/ui/act.js', 'src/js/ui/event.js', 'src/js/ui/sound.js',
 				'src/js/util.js'])
         .pipe(_.sourcemaps.init())
-		/*.pipe(_.babel({
+			.pipe(_.babel({
             presets: ['es2015']
-		 }))*/
+			}))
         .pipe(_.concat('build.js'))
         .pipe(_.sourcemaps.write('.'))
         .pipe(gulp.dest('./public/js'))
