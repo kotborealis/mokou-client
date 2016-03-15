@@ -5,6 +5,12 @@
 mokou.client = {};
 
 /**
+ * Object to store some info
+ * @type {{}}
+ */
+mokou.client.info = {};
+
+/**
  * Init websocket connection
  */
 mokou.client.init = function () {
@@ -28,7 +34,7 @@ mokou.client.init = function () {
     mokou.client.ws.onerror =
         mokou.client.ws.onclose = function (e) {
             mokou.ui.event.connection(0);
-    };
+        };
 
     /**
      * Open event

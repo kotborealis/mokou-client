@@ -9,6 +9,7 @@ mokou.client.act = {};
  */
 mokou.client.act.login = function (username) {
     if (!username)return;
+    mokou.client.info.username_ = username;
     mokou.client.ws.send(JSON.stringify({
         act: "login",
         name: username

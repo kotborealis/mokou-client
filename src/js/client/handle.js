@@ -20,6 +20,8 @@ mokou.client.handlers = {};
  * Handle logged in event
  */
 mokou.client.handlers["loggedIn"] = function () {
+    mokou.client.info.username = mokou.client.info.username_;
+    mokou.client.info.username_ = "";
     mokou.ui.event.login();
 };
 /**
