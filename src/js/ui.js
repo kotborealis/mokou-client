@@ -93,3 +93,20 @@ mokou_client_ui.userListRemoveUser = function (id) {
         }
     return false;
 };
+
+function handleImgSize(img){
+    console.log("imgsize");
+    img.onload=function(){
+        console.log("ONLOAD");
+        console.log(img.width);
+        console.log(img.height);
+        if(img.width>200){
+            img.width=200;
+            img.height="";
+        }
+        else if(img.height>200){
+            img.height=200;
+            img.width="";
+        }
+    }
+}
