@@ -18,16 +18,11 @@
 <body>
 <div class="container">
     <div id="new_messages" class="hide">Есть новые сообщения</div>
+    <div id="no_connection" class="hide">Нет подключения</div>
     <div class="header">
-            <span class="users_button lg_hide">
-                <img src="img/users-icon.png">
-            </span>
-        <!--<span class="menu_button_button lg_hide">
-            <img src="img/menu-icon.png">
-        </span>-->
-        <div class="logo">
-            0.1
-        </div>
+        <span class="users_button lg_hide">
+            <img src="img/users-icon.png">
+        </span>
     </div>
     <div class="chat">
 
@@ -38,15 +33,15 @@
     <div class="controls">
         <div class="messageBox hide">
             <form id="messageForm">
-                <input type="text" id="chatInputMessage" maxlength="300" title="" placeholder="">
-                <button id="chatSayButton">Сказать</button>
+                <input type="text" id="chatInputMessage" maxlength="300" title="" placeholder="" autocomplete="off">
+                <button type="submit">Сказать</button>
                 <span id="chatExitButton"><img src="img/exit-icon.png" width="20"></span>
             </form>
         </div>
         <div class="loginBox">
             <form id="loginForm">
-                <input type="text" id="loginInputNick" maxlength="50" title="" placeholder="Ник">
-                <button id="chatLoginButton">Войти</button>
+                <input type="text" id="loginInputNick" maxlength="50" title="" placeholder="Ник" autocomplete="off">
+                <button type="submit">Войти</button>
             </form>
         </div>
     </div>
