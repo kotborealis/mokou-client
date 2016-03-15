@@ -42,7 +42,7 @@ mokou_client_ui.scrollToBottom = function () {
 mokou_client_ui.chatAddMessage = function (name, text, time, icon) {
     var msg = mokou_client_ui.createFromTemplate("chat_message");
     var date = new Date(time * 1000);
-    msg.getElementsByClassName("time")[0].appendChild(document.createTextNode(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()));
+    msg.getElementsByClassName("time")[0].appendChild(document.createTextNode(("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2) + ":" + ("0" + date.getSeconds()).slice(-2)));
     msg.getElementsByClassName("user")[0].appendChild(document.createTextNode(name + ":"));
     if (icon !== "" && icon !== null && icon !== undefined) {
         $(msg.getElementsByClassName("user")[0]).css("background", "url(" + icon + ") left center no-repeat");
@@ -62,7 +62,7 @@ mokou_client_ui.chatAddMessage = function (name, text, time, icon) {
 mokou_client_ui.chatAddEvent = function (text, time) {
     var msg = mokou_client_ui.createFromTemplate("chat_event");
     var date = new Date(time * 1000);
-    msg.getElementsByClassName("time")[0].appendChild(document.createTextNode(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()));
+    msg.getElementsByClassName("time")[0].appendChild(document.createTextNode(("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2) + ":" + ("0" + date.getSeconds()).slice(-2)));
     msg.getElementsByClassName("text")[0].innerHTML = text;
     if (mokou_client_ui.scrolledToBottom) {
         $(".chat")[0].appendChild(msg);
@@ -92,6 +92,13 @@ mokou_client_ui.userListRemoveUser = function (id) {
             return true;
         }
     return false;
+};
+
+mokou_client_ui.set_no_connection = function (connection) {
+    if (connection)
+        $("#no_connection").removeClass("hide");
+    else
+        $("#no_connection").addClass("hide");
 };
 
 function handleImgSize(img){

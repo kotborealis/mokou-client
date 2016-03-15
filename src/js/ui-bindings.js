@@ -44,6 +44,8 @@ jQuery(function ($) {
             mokou_client_ui.scrolledToBottom = false;
         }
     });
+
+    window.onhashchange = mokou_client.init;
     mokou_client_ui.initTemplate();
     mokou_client.init();
 });

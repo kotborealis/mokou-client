@@ -2,6 +2,7 @@ var mokou_client = {};
 
 //init
 mokou_client.init = function () {
+    //mokou_client_ui.set_no_connection(1);
     if (window.location.hash === "")
         mokou_client.ws = new WebSocket("ws://" + window.location.hostname + ":8090");
     else
@@ -13,6 +14,15 @@ mokou_client.init = function () {
                 mokou_client.handle(data[i]);
         else
             mokou_client.handle(data);
+    };
+    mokou_client.ws.onopen = function (e) {
+        mokou_client_ui.set_no_connection(0);
+    };
+    mokou_client.ws.onerror = function (e) {
+        mokou_client_ui.set_no_connection(1);
+    };
+    mokou_client.ws.onclose = function (e) {
+        mokou_client_ui.set_no_connection(1);
     };
 };
 
