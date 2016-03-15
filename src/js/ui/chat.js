@@ -14,6 +14,11 @@ mokou.ui.chat.scrolled = true;
  * @param data
  */
 mokou.ui.chat.addEvent = function (data) {
+    if (data.text.indexOf(mokou.client.info.username) >= 0)
+        mokou.ui.sound.play("beep");
+    else
+        mokou.ui.sound.play("click");
+
     var element = $(mokou.ui.template.element("chat_event"));
     element.find(".time").get(0).innerHTML = util.getTimeString(data.ts);
     element.find(".text").get(0).innerHTML = data.text;
@@ -24,6 +29,12 @@ mokou.ui.chat.addEvent = function (data) {
  * @param data
  */
 mokou.ui.chat.addMessage = function (data) {
+    data.text = data.text.replace(mokou.client.info.username + ", ", "<span class='userName'>" + mokou.client.info.username + "</span>, ");
+    if (data.text.indexOf(mokou.client.info.username) >= 0)
+        mokou.ui.sound.play("beep");
+    else
+        mokou.ui.sound.play("click");
+
     var element = $(mokou.ui.template.element("chat_message"));
     var user = element.find(".user");
     element.find(".time").get(0).innerHTML = util.getTimeString(data.ts);

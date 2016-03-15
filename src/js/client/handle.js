@@ -26,9 +26,8 @@ mokou.client.handlers["loggedIn"] = function () {
 };
 /**
  * Handle logged out event
- * @param data
  */
-mokou.client.handlers["loggedOut"] = function (data) {
+mokou.client.handlers["loggedOut"] = function () {
     mokou.ui.event.logout();
 };
 /**

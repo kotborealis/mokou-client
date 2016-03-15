@@ -6,10 +6,11 @@ var mokou = {};
 
 jQuery(function ($) {
     /**
-     * Init UI templates and client connection
+     * Init UI templates, sounds and client connection
      */
     mokou.ui.template.init();
     mokou.client.init();
+    mokou.ui.sound.init([{name: "beep", src: "snd/beeps.mp3"}, {name: "click", src: "snd/click.mp3"}]);
 
     /**
      * Bind UI functions to client events
