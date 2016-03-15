@@ -5,6 +5,11 @@
 mokou.ui.chat = {};
 
 /**
+ * Chat scrolled boolean (true by default to scroll after getting history from server)
+ */
+mokou.ui.chat.scrolled = true;
+
+/**
  * Add event to chat
  * @param data
  */
@@ -70,7 +75,7 @@ mokou.ui.chat.onscroll = function () {
 
 mokou.ui.chat.connection = function (connection) {
     if (connection)
-        $("#no_connection").removeClass("hide");
-    else
         $("#no_connection").addClass("hide");
+    else
+        $("#no_connection").removeClass("hide");
 };
